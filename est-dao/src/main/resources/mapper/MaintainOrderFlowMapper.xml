@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.MaintainOrderFlowMapper">
+
+    <select id="getMaintainOrderFlowById" resultType="cn.est.pojo.MaintainOrderFlow">
+        select
+                id as id,
+                orderNo as orderNo,
+                orderStatus as orderStatus,
+                orderStatusDesc as orderStatusDesc,
+                operationUId as operationUId,
+                operationName as operationName,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from maintain_order_flow
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getMaintainOrderFlowListByMap" resultType="cn.est.pojo.MaintainOrderFlow" parameterType="java.util.Map">
+        select
+                id as id,
+                orderNo as orderNo,
+                orderStatus as orderStatus,
+                orderStatusDesc as orderStatusDesc,
+                operationUId as operationUId,
+                operationName as operationName,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from maintain_order_flow
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="orderNo != null and orderNo!=''">
+                        and orderNo=#{orderNo}
+                    </if>
+                    <if test="orderStatus != null">
+                        and orderStatus=#{orderStatus}
+                    </if>
+                    <if test="orderStatusDesc != null and orderStatusDesc!=''">
+                        and orderStatusDesc=#{orderStatusDesc}
+                    </if>
+                    <if test="operationUId != null">
+                        and operationUId=#{operationUId}
+                    </if>
+                    <if test="operationName != null and operationName!=''">
+                        and operationName=#{operationName}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getMaintainOrderFlowCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from maintain_order_flow
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="orderNo != null and orderNo!=''">
+                    and orderNo=#{orderNo}
+                </if>
+                <if test="orderStatus != null">
+                    and orderStatus=#{orderStatus}
+                </if>
+                <if test="orderStatusDesc != null and orderStatusDesc!=''">
+                    and orderStatusDesc=#{orderStatusDesc}
+                </if>
+                <if test="operationUId != null">
+                    and operationUId=#{operationUId}
+                </if>
+                <if test="operationName != null and operationName!=''">
+                    and operationName=#{operationName}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertMaintainOrderFlow" parameterType="cn.est.pojo.MaintainOrderFlow">
+        insert into maintain_order_flow(
+                        orderNo,
+                        orderStatus,
+                        orderStatusDesc,
+                        operationUId,
+                        operationName,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{orderNo},
+                     #{orderStatus},
+                     #{orderStatusDesc},
+                     #{operationUId},
+                     #{operationName},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateMaintainOrderFlow" parameterType="cn.est.pojo.MaintainOrderFlow">
+        update maintain_order_flow
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="orderNo != null and orderNo!=''">
+                                orderNo=#{orderNo},
+                            </if>
+                            <if test="orderStatus != null">
+                                orderStatus=#{orderStatus},
+                            </if>
+                            <if test="orderStatusDesc != null and orderStatusDesc!=''">
+                                orderStatusDesc=#{orderStatusDesc},
+                            </if>
+                            <if test="operationUId != null">
+                                operationUId=#{operationUId},
+                            </if>
+                            <if test="operationName != null and operationName!=''">
+                                operationName=#{operationName},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteMaintainOrderFlowById" parameterType="String">
+        delete from maintain_order_flow where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteMaintainOrderFlow" parameterType="java.util.Map">
+        delete from maintain_order_flow where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

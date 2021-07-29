@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.ModelMapper">
+
+    <select id="getModelById" resultType="cn.est.pojo.Model">
+        select
+                id as id,
+                modelName as modelName,
+                brandId as brandId,
+                classifyId as classifyId,
+                exchangePrice as exchangePrice,
+                topPrice as topPrice,
+                faceImg as faceImg,
+                contentImg as contentImg,
+                description as description,
+                status as status,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from model
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getModelListByMap" resultType="cn.est.pojo.Model" parameterType="java.util.Map">
+        select
+                id as id,
+                modelName as modelName,
+                brandId as brandId,
+                classifyId as classifyId,
+                exchangePrice as exchangePrice,
+                topPrice as topPrice,
+                faceImg as faceImg,
+                contentImg as contentImg,
+                description as description,
+                status as status,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from model
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="modelName != null and modelName!=''">
+                        and modelName=#{modelName}
+                    </if>
+                    <if test="brandId != null">
+                        and brandId=#{brandId}
+                    </if>
+                    <if test="classifyId != null">
+                        and classifyId=#{classifyId}
+                    </if>
+                    <if test="exchangePrice != null">
+                        and exchangePrice=#{exchangePrice}
+                    </if>
+                    <if test="topPrice != null">
+                        and topPrice=#{topPrice}
+                    </if>
+                    <if test="faceImg != null and faceImg!=''">
+                        and faceImg=#{faceImg}
+                    </if>
+                    <if test="contentImg != null and contentImg!=''">
+                        and contentImg=#{contentImg}
+                    </if>
+                    <if test="description != null and description!=''">
+                        and description=#{description}
+                    </if>
+                    <if test="status != null">
+                        and status=#{status}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getModelCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from model
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="modelName != null and modelName!=''">
+                    and modelName=#{modelName}
+                </if>
+                <if test="brandId != null">
+                    and brandId=#{brandId}
+                </if>
+                <if test="classifyId != null">
+                    and classifyId=#{classifyId}
+                </if>
+                <if test="exchangePrice != null">
+                    and exchangePrice=#{exchangePrice}
+                </if>
+                <if test="topPrice != null">
+                    and topPrice=#{topPrice}
+                </if>
+                <if test="faceImg != null and faceImg!=''">
+                    and faceImg=#{faceImg}
+                </if>
+                <if test="contentImg != null and contentImg!=''">
+                    and contentImg=#{contentImg}
+                </if>
+                <if test="description != null and description!=''">
+                    and description=#{description}
+                </if>
+                <if test="status != null">
+                    and status=#{status}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertModel" parameterType="cn.est.pojo.Model">
+        insert into model(
+                        modelName,
+                        brandId,
+                        classifyId,
+                        exchangePrice,
+                        topPrice,
+                        faceImg,
+                        contentImg,
+                        description,
+                        status,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{modelName},
+                     #{brandId},
+                     #{classifyId},
+                     #{exchangePrice},
+                     #{topPrice},
+                     #{faceImg},
+                     #{contentImg},
+                     #{description},
+                     #{status},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateModel" parameterType="cn.est.pojo.Model">
+        update model
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="modelName != null and modelName!=''">
+                                modelName=#{modelName},
+                            </if>
+                            <if test="brandId != null">
+                                brandId=#{brandId},
+                            </if>
+                            <if test="classifyId != null">
+                                classifyId=#{classifyId},
+                            </if>
+                            <if test="exchangePrice != null">
+                                exchangePrice=#{exchangePrice},
+                            </if>
+                            <if test="topPrice != null">
+                                topPrice=#{topPrice},
+                            </if>
+                            <if test="faceImg != null and faceImg!=''">
+                                faceImg=#{faceImg},
+                            </if>
+                            <if test="contentImg != null and contentImg!=''">
+                                contentImg=#{contentImg},
+                            </if>
+                            <if test="description != null and description!=''">
+                                description=#{description},
+                            </if>
+                            <if test="status != null">
+                                status=#{status},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteModelById" parameterType="String">
+        delete from model where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteModel" parameterType="java.util.Map">
+        delete from model where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

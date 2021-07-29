@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.AppointmentMapper">
+
+    <select id="getAppointmentById" resultType="cn.est.pojo.Appointment">
+        select
+                id as id,
+                appointCode as appointCode,
+                userId as userId,
+                phone as phone,
+                appintDate as appintDate,
+                temporalInterval as temporalInterval,
+                adress as adress,
+                status as status,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from appointment
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getAppointmentListByMap" resultType="cn.est.pojo.Appointment" parameterType="java.util.Map">
+        select
+                id as id,
+                appointCode as appointCode,
+                userId as userId,
+                phone as phone,
+                appintDate as appintDate,
+                temporalInterval as temporalInterval,
+                adress as adress,
+                status as status,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from appointment
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="appointCode != null and appointCode!=''">
+                        and appointCode=#{appointCode}
+                    </if>
+                    <if test="userId != null">
+                        and userId=#{userId}
+                    </if>
+                    <if test="phone != null and phone!=''">
+                        and phone=#{phone}
+                    </if>
+                    <if test="null!=appintDate">
+                        and appintDate=#{appintDate}
+                    </if>
+                    <if test="temporalInterval != null">
+                        and temporalInterval=#{temporalInterval}
+                    </if>
+                    <if test="adress != null and adress!=''">
+                        and adress=#{adress}
+                    </if>
+                    <if test="status != null">
+                        and status=#{status}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getAppointmentCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from appointment
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="appointCode != null and appointCode!=''">
+                    and appointCode=#{appointCode}
+                </if>
+                <if test="userId != null">
+                    and userId=#{userId}
+                </if>
+                <if test="phone != null and phone!=''">
+                    and phone=#{phone}
+                </if>
+                <if test="null!=appintDate">
+                    and appintDate=#{appintDate}
+                </if>
+                <if test="temporalInterval != null">
+                    and temporalInterval=#{temporalInterval}
+                </if>
+                <if test="adress != null and adress!=''">
+                    and adress=#{adress}
+                </if>
+                <if test="status != null">
+                    and status=#{status}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertAppointment" parameterType="cn.est.pojo.Appointment">
+        insert into appointment(
+                        appointCode,
+                        userId,
+                        phone,
+                        appintDate,
+                        temporalInterval,
+                        adress,
+                        status,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{appointCode},
+                     #{userId},
+                     #{phone},
+                     #{appintDate},
+                     #{temporalInterval},
+                     #{adress},
+                     #{status},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateAppointment" parameterType="cn.est.pojo.Appointment">
+        update appointment
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="appointCode != null and appointCode!=''">
+                                appointCode=#{appointCode},
+                            </if>
+                            <if test="userId != null">
+                                userId=#{userId},
+                            </if>
+                            <if test="phone != null and phone!=''">
+                                phone=#{phone},
+                            </if>
+                            <if test="appintDate != null">
+                                appintDate=#{appintDate},
+                            </if>
+                            <if test="temporalInterval != null">
+                                temporalInterval=#{temporalInterval},
+                            </if>
+                            <if test="adress != null and adress!=''">
+                                adress=#{adress},
+                            </if>
+                            <if test="status != null">
+                                status=#{status},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteAppointmentById" parameterType="String">
+        delete from appointment where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteAppointment" parameterType="java.util.Map">
+        delete from appointment where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

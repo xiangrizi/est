@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.PayOrderMapper">
+
+    <select id="getPayOrderById" resultType="cn.est.pojo.PayOrder">
+        select
+                id as id,
+                orderNo as orderNo,
+                payNo as payNo,
+                aliTradeNo as aliTradeNo,
+                userId as userId,
+                price as price,
+                payType as payType,
+                status as status,
+                payChannel as payChannel,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from pay_order
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getPayOrderListByMap" resultType="cn.est.pojo.PayOrder" parameterType="java.util.Map">
+        select
+                id as id,
+                orderNo as orderNo,
+                payNo as payNo,
+                aliTradeNo as aliTradeNo,
+                userId as userId,
+                price as price,
+                payType as payType,
+                status as status,
+                payChannel as payChannel,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from pay_order
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="orderNo != null and orderNo!=''">
+                        and orderNo=#{orderNo}
+                    </if>
+                    <if test="payNo != null and payNo!=''">
+                        and payNo=#{payNo}
+                    </if>
+                    <if test="aliTradeNo != null and aliTradeNo!=''">
+                        and aliTradeNo=#{aliTradeNo}
+                    </if>
+                    <if test="userId != null">
+                        and userId=#{userId}
+                    </if>
+                    <if test="price != null">
+                        and price=#{price}
+                    </if>
+                    <if test="payType != null">
+                        and payType=#{payType}
+                    </if>
+                    <if test="status != null">
+                        and status=#{status}
+                    </if>
+                    <if test="payChannel != null">
+                        and payChannel=#{payChannel}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getPayOrderCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from pay_order
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="orderNo != null and orderNo!=''">
+                    and orderNo=#{orderNo}
+                </if>
+                <if test="payNo != null and payNo!=''">
+                    and payNo=#{payNo}
+                </if>
+                <if test="aliTradeNo != null and aliTradeNo!=''">
+                    and aliTradeNo=#{aliTradeNo}
+                </if>
+                <if test="userId != null">
+                    and userId=#{userId}
+                </if>
+                <if test="price != null">
+                    and price=#{price}
+                </if>
+                <if test="payType != null">
+                    and payType=#{payType}
+                </if>
+                <if test="status != null">
+                    and status=#{status}
+                </if>
+                <if test="payChannel != null">
+                    and payChannel=#{payChannel}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertPayOrder" parameterType="cn.est.pojo.PayOrder">
+        insert into pay_order(
+                        orderNo,
+                        payNo,
+                        aliTradeNo,
+                        userId,
+                        price,
+                        payType,
+                        status,
+                        payChannel,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{orderNo},
+                     #{payNo},
+                     #{aliTradeNo},
+                     #{userId},
+                     #{price},
+                     #{payType},
+                     #{status},
+                     #{payChannel},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updatePayOrder" parameterType="cn.est.pojo.PayOrder">
+        update pay_order
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="orderNo != null and orderNo!=''">
+                                orderNo=#{orderNo},
+                            </if>
+                            <if test="payNo != null and payNo!=''">
+                                payNo=#{payNo},
+                            </if>
+                            <if test="aliTradeNo != null and aliTradeNo!=''">
+                                aliTradeNo=#{aliTradeNo},
+                            </if>
+                            <if test="userId != null">
+                                userId=#{userId},
+                            </if>
+                            <if test="price != null">
+                                price=#{price},
+                            </if>
+                            <if test="payType != null">
+                                payType=#{payType},
+                            </if>
+                            <if test="status != null">
+                                status=#{status},
+                            </if>
+                            <if test="payChannel != null">
+                                payChannel=#{payChannel},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deletePayOrderById" parameterType="String">
+        delete from pay_order where id = #{id}
+    </delete>
+
+    <delete id="batchDeletePayOrder" parameterType="java.util.Map">
+        delete from pay_order where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

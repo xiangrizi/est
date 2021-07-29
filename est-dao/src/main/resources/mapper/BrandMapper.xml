@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.BrandMapper">
+
+    <select id="getBrandById" resultType="cn.est.pojo.Brand">
+        select
+                id as id,
+                brandName as brandName,
+                logo as logo,
+                description as description,
+                status as status,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from brand
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getBrandListByMap" resultType="cn.est.pojo.Brand" parameterType="java.util.Map">
+        select
+                id as id,
+                brandName as brandName,
+                logo as logo,
+                description as description,
+                status as status,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from brand
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="brandName != null and brandName!=''">
+                        and brandName=#{brandName}
+                    </if>
+                    <if test="logo != null and logo!=''">
+                        and logo=#{logo}
+                    </if>
+                    <if test="description != null and description!=''">
+                        and description=#{description}
+                    </if>
+                    <if test="status != null">
+                        and status=#{status}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getBrandCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from brand
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="brandName != null and brandName!=''">
+                    and brandName=#{brandName}
+                </if>
+                <if test="logo != null and logo!=''">
+                    and logo=#{logo}
+                </if>
+                <if test="description != null and description!=''">
+                    and description=#{description}
+                </if>
+                <if test="status != null">
+                    and status=#{status}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertBrand" parameterType="cn.est.pojo.Brand">
+        insert into brand(
+                        brandName,
+                        logo,
+                        description,
+                        status,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{brandName},
+                     #{logo},
+                     #{description},
+                     #{status},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateBrand" parameterType="cn.est.pojo.Brand">
+        update brand
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="brandName != null and brandName!=''">
+                                brandName=#{brandName},
+                            </if>
+                            <if test="logo != null and logo!=''">
+                                logo=#{logo},
+                            </if>
+                            <if test="description != null and description!=''">
+                                description=#{description},
+                            </if>
+                            <if test="status != null">
+                                status=#{status},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteBrandById" parameterType="String">
+        delete from brand where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteBrand" parameterType="java.util.Map">
+        delete from brand where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

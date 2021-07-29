@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.EvaluateDetailMapper">
+
+    <select id="getEvaluateDetailById" resultType="cn.est.pojo.EvaluateDetail">
+        select
+                id as id,
+                evaluateId as evaluateId,
+                malfId as malfId,
+                optionId as optionId,
+                optionName as optionName,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from evaluate_detail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getEvaluateDetailListByMap" resultType="cn.est.pojo.EvaluateDetail" parameterType="java.util.Map">
+        select
+                id as id,
+                evaluateId as evaluateId,
+                malfId as malfId,
+                optionId as optionId,
+                optionName as optionName,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from evaluate_detail
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="evaluateId != null">
+                        and evaluateId=#{evaluateId}
+                    </if>
+                    <if test="malfId != null">
+                        and malfId=#{malfId}
+                    </if>
+                    <if test="optionId != null">
+                        and optionId=#{optionId}
+                    </if>
+                    <if test="optionName != null and optionName!=''">
+                        and optionName=#{optionName}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getEvaluateDetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from evaluate_detail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="evaluateId != null">
+                    and evaluateId=#{evaluateId}
+                </if>
+                <if test="malfId != null">
+                    and malfId=#{malfId}
+                </if>
+                <if test="optionId != null">
+                    and optionId=#{optionId}
+                </if>
+                <if test="optionName != null and optionName!=''">
+                    and optionName=#{optionName}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertEvaluateDetail" parameterType="cn.est.pojo.EvaluateDetail">
+        insert into evaluate_detail(
+                        evaluateId,
+                        malfId,
+                        optionId,
+                        optionName,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{evaluateId},
+                     #{malfId},
+                     #{optionId},
+                     #{optionName},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateEvaluateDetail" parameterType="cn.est.pojo.EvaluateDetail">
+        update evaluate_detail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="evaluateId != null">
+                                evaluateId=#{evaluateId},
+                            </if>
+                            <if test="malfId != null">
+                                malfId=#{malfId},
+                            </if>
+                            <if test="optionId != null">
+                                optionId=#{optionId},
+                            </if>
+                            <if test="optionName != null and optionName!=''">
+                                optionName=#{optionName},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteEvaluateDetailById" parameterType="String">
+        delete from evaluate_detail where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteEvaluateDetail" parameterType="java.util.Map">
+        delete from evaluate_detail where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

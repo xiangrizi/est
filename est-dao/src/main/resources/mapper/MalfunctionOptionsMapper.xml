@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.MalfunctionOptionsMapper">
+
+    <select id="getMalfunctionOptionsById" resultType="cn.est.pojo.MalfunctionOptions">
+        select
+                id as id,
+                modelId as modelId,
+                malfId as malfId,
+                optionName as optionName,
+                isHint as isHint,
+                hintInfo as hintInfo,
+                hintImg as hintImg,
+                processType as processType,
+                ratio as ratio,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from malfunction_options
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getMalfunctionOptionsListByMap" resultType="cn.est.pojo.MalfunctionOptions" parameterType="java.util.Map">
+        select
+                id as id,
+                modelId as modelId,
+                malfId as malfId,
+                optionName as optionName,
+                isHint as isHint,
+                hintInfo as hintInfo,
+                hintImg as hintImg,
+                processType as processType,
+                ratio as ratio,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from malfunction_options
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="modelId != null">
+                        and modelId=#{modelId}
+                    </if>
+                    <if test="malfId != null">
+                        and malfId=#{malfId}
+                    </if>
+                    <if test="optionName != null and optionName!=''">
+                        and optionName=#{optionName}
+                    </if>
+                    <if test="isHint != null">
+                        and isHint=#{isHint}
+                    </if>
+                    <if test="hintInfo != null and hintInfo!=''">
+                        and hintInfo=#{hintInfo}
+                    </if>
+                    <if test="hintImg != null and hintImg!=''">
+                        and hintImg=#{hintImg}
+                    </if>
+                    <if test="processType != null">
+                        and processType=#{processType}
+                    </if>
+                    <if test="ratio != null">
+                        and ratio=#{ratio}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getMalfunctionOptionsCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from malfunction_options
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="modelId != null">
+                    and modelId=#{modelId}
+                </if>
+                <if test="malfId != null">
+                    and malfId=#{malfId}
+                </if>
+                <if test="optionName != null and optionName!=''">
+                    and optionName=#{optionName}
+                </if>
+                <if test="isHint != null">
+                    and isHint=#{isHint}
+                </if>
+                <if test="hintInfo != null and hintInfo!=''">
+                    and hintInfo=#{hintInfo}
+                </if>
+                <if test="hintImg != null and hintImg!=''">
+                    and hintImg=#{hintImg}
+                </if>
+                <if test="processType != null">
+                    and processType=#{processType}
+                </if>
+                <if test="ratio != null">
+                    and ratio=#{ratio}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertMalfunctionOptions" parameterType="cn.est.pojo.MalfunctionOptions">
+        insert into malfunction_options(
+                        modelId,
+                        malfId,
+                        optionName,
+                        isHint,
+                        hintInfo,
+                        hintImg,
+                        processType,
+                        ratio,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{modelId},
+                     #{malfId},
+                     #{optionName},
+                     #{isHint},
+                     #{hintInfo},
+                     #{hintImg},
+                     #{processType},
+                     #{ratio},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateMalfunctionOptions" parameterType="cn.est.pojo.MalfunctionOptions">
+        update malfunction_options
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="modelId != null">
+                                modelId=#{modelId},
+                            </if>
+                            <if test="malfId != null">
+                                malfId=#{malfId},
+                            </if>
+                            <if test="optionName != null and optionName!=''">
+                                optionName=#{optionName},
+                            </if>
+                            <if test="isHint != null">
+                                isHint=#{isHint},
+                            </if>
+                            <if test="hintInfo != null and hintInfo!=''">
+                                hintInfo=#{hintInfo},
+                            </if>
+                            <if test="hintImg != null and hintImg!=''">
+                                hintImg=#{hintImg},
+                            </if>
+                            <if test="processType != null">
+                                processType=#{processType},
+                            </if>
+                            <if test="ratio != null">
+                                ratio=#{ratio},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteMalfunctionOptionsById" parameterType="String">
+        delete from malfunction_options where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteMalfunctionOptions" parameterType="java.util.Map">
+        delete from malfunction_options where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>

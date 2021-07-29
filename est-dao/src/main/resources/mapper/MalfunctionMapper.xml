@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.est.mapper.MalfunctionMapper">
+
+    <select id="getMalfunctionById" resultType="cn.est.pojo.Malfunction">
+        select
+                id as id,
+                modelId as modelId,
+                title as title,
+                isHint as isHint,
+                hintTitle as hintTitle,
+                hintInfo as hintInfo,
+                hintImg as hintImg,
+                maintainTopPrice as maintainTopPrice,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from malfunction
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getMalfunctionListByMap" resultType="cn.est.pojo.Malfunction" parameterType="java.util.Map">
+        select
+                id as id,
+                modelId as modelId,
+                title as title,
+                isHint as isHint,
+                hintTitle as hintTitle,
+                hintInfo as hintInfo,
+                hintImg as hintImg,
+                maintainTopPrice as maintainTopPrice,
+                createdUserId as createdUserId,
+                updatedUserId as updatedUserId,
+                creatdTime as creatdTime,
+                updatedTime as updatedTime,
+                isDelete as isDelete
+        from malfunction
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null">
+                        and id=#{id}
+                    </if>
+                    <if test="modelId != null">
+                        and modelId=#{modelId}
+                    </if>
+                    <if test="title != null and title!=''">
+                        and title=#{title}
+                    </if>
+                    <if test="isHint != null">
+                        and isHint=#{isHint}
+                    </if>
+                    <if test="hintTitle != null and hintTitle!=''">
+                        and hintTitle=#{hintTitle}
+                    </if>
+                    <if test="hintInfo != null and hintInfo!=''">
+                        and hintInfo=#{hintInfo}
+                    </if>
+                    <if test="hintImg != null and hintImg!=''">
+                        and hintImg=#{hintImg}
+                    </if>
+                    <if test="maintainTopPrice != null">
+                        and maintainTopPrice=#{maintainTopPrice}
+                    </if>
+                    <if test="createdUserId != null">
+                        and createdUserId=#{createdUserId}
+                    </if>
+                    <if test="updatedUserId != null">
+                        and updatedUserId=#{updatedUserId}
+                    </if>
+                    <if test="null!=creatdTime">
+                        and creatdTime=#{creatdTime}
+                    </if>
+                    <if test="null!=updatedTime">
+                        and updatedTime=#{updatedTime}
+                    </if>
+                    <if test="isDelete != null">
+                        and isDelete=#{isDelete}
+                    </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getMalfunctionCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from malfunction
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null">
+                    and id=#{id}
+                </if>
+                <if test="modelId != null">
+                    and modelId=#{modelId}
+                </if>
+                <if test="title != null and title!=''">
+                    and title=#{title}
+                </if>
+                <if test="isHint != null">
+                    and isHint=#{isHint}
+                </if>
+                <if test="hintTitle != null and hintTitle!=''">
+                    and hintTitle=#{hintTitle}
+                </if>
+                <if test="hintInfo != null and hintInfo!=''">
+                    and hintInfo=#{hintInfo}
+                </if>
+                <if test="hintImg != null and hintImg!=''">
+                    and hintImg=#{hintImg}
+                </if>
+                <if test="maintainTopPrice != null">
+                    and maintainTopPrice=#{maintainTopPrice}
+                </if>
+                <if test="createdUserId != null">
+                    and createdUserId=#{createdUserId}
+                </if>
+                <if test="updatedUserId != null">
+                    and updatedUserId=#{updatedUserId}
+                </if>
+                <if test="null!=creatdTime">
+                    and creatdTime=#{creatdTime}
+                </if>
+                <if test="null!=updatedTime">
+                    and updatedTime=#{updatedTime}
+                </if>
+                <if test="isDelete != null">
+                    and isDelete=#{isDelete}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertMalfunction" parameterType="cn.est.pojo.Malfunction">
+        insert into malfunction(
+                        modelId,
+                        title,
+                        isHint,
+                        hintTitle,
+                        hintInfo,
+                        hintImg,
+                        maintainTopPrice,
+                        createdUserId,
+                        updatedUserId,
+                        creatdTime,
+                        updatedTime,
+                        isDelete)
+        values(
+                     #{modelId},
+                     #{title},
+                     #{isHint},
+                     #{hintTitle},
+                     #{hintInfo},
+                     #{hintImg},
+                     #{maintainTopPrice},
+                     #{createdUserId},
+                     #{updatedUserId},
+                     #{creatdTime},
+                     #{updatedTime},
+                    #{isDelete})
+    </insert>
+
+    <update id="updateMalfunction" parameterType="cn.est.pojo.Malfunction">
+        update malfunction
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                            <if test="modelId != null">
+                                modelId=#{modelId},
+                            </if>
+                            <if test="title != null and title!=''">
+                                title=#{title},
+                            </if>
+                            <if test="isHint != null">
+                                isHint=#{isHint},
+                            </if>
+                            <if test="hintTitle != null and hintTitle!=''">
+                                hintTitle=#{hintTitle},
+                            </if>
+                            <if test="hintInfo != null and hintInfo!=''">
+                                hintInfo=#{hintInfo},
+                            </if>
+                            <if test="hintImg != null and hintImg!=''">
+                                hintImg=#{hintImg},
+                            </if>
+                            <if test="maintainTopPrice != null">
+                                maintainTopPrice=#{maintainTopPrice},
+                            </if>
+                            <if test="createdUserId != null">
+                                createdUserId=#{createdUserId},
+                            </if>
+                            <if test="updatedUserId != null">
+                                updatedUserId=#{updatedUserId},
+                            </if>
+                            <if test="creatdTime != null">
+                                creatdTime=#{creatdTime},
+                            </if>
+                            <if test="updatedTime != null">
+                                updatedTime=#{updatedTime},
+                            </if>
+                            <if test="isDelete != null">
+                                isDelete=#{isDelete}
+                            </if>
+        </trim>
+    </update>
+
+    <delete id="deleteMalfunctionById" parameterType="String">
+        delete from malfunction where id = #{id}
+    </delete>
+
+    <delete id="batchDeleteMalfunction" parameterType="java.util.Map">
+        delete from malfunction where id in (
+            <foreach collection="ids" item="id" separator=",">
+                    #{id}
+            </foreach>
+        )
+    </delete>
+</mapper>
