@@ -11,10 +11,3 @@ server:
 mybatis:
   mapper-locations: classpath:/cn/est/mapper/*.xml
 
-
-
-
-#非空配置
-param:
-  notNull:
-    /api/sms/verifyCode=phone&codeType, /api/user/login/sms=phone&sms, /api/evaluate/specList=modelId, /api/evaluate/assess=optionIds&modelId,/api/order/maintain/submit=evaluateId&phone&appintDate&temporalInterval&adress&sms
