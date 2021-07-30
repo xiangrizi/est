@@ -114,6 +114,11 @@ public class Constants {
          */
         public final static String KEY_HOME_TREE = PREFIX + "_home_classifyTree:";
 
+        /**
+         * 评估维度
+         */
+        public final static String KEY_Malfunction =PREFIX +"_malfunction:";
+
 
     }
 
@@ -140,22 +145,6 @@ public class Constants {
         /**
          * 一秒
          */
-        public final static Integer SECOND_INT = 1;
-
-        /**
-         * 一分钟
-         */
-        public final static Integer MINUTE_INT = SECOND_INT * 60;
-
-        /**
-         * 半个小时
-         */
-        public final static Integer HALF_AN_HOUR_INT = MINUTE_INT * 30;
-
-
-        /**
-         * 一秒
-         */
         public final static Integer SECOND = 1;
 
         /**
@@ -167,6 +156,26 @@ public class Constants {
          * 半个小时
          */
         public final static Integer HALF_AN_HOUR = MINUTE * 30;
+
+        /**
+         * 一天
+         */
+        public final static Integer DAY = MINUTE * 60 * 24;
+
+//        /**
+//         * 一秒
+//         */
+//        public final static Integer SECOND = 1;
+//
+//        /**
+//         * 一分钟
+//         */
+//        public final static Integer MINUTE = SECOND * 60;
+//
+//        /**
+//         * 半个小时
+//         */
+//        public final static Integer HALF_AN_HOUR = MINUTE * 30;
 
     }
 

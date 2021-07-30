@@ -1,31 +1,13 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-../../Archive/佳音Java-框架/day101_分组开发-二手兔项目准备/01_code/est/.idea
-*.iws
+### IDEA ###
+.idea/*
 *.iml
-*.ipr
+*/target/*
+*/*.iml
+/.gradle/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-
-### VS Code ###
-.vscode/
+# Temp
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp

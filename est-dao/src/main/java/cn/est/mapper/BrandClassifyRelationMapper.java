@@ -6,18 +6,18 @@ import java.util.Map;
 
 public interface BrandClassifyRelationMapper {
 
-	public BrandClassifyRelation getBrandClassifyRelationById(@Param(value = "id") Long id);
+	BrandClassifyRelation getBrandClassifyRelationById(@Param(value = "id") Long id);
 
-	public List<BrandClassifyRelation>	getBrandClassifyRelationListByMap(Map<String,Object> param);
+	List<BrandClassifyRelation>	getBrandClassifyRelationListByMap(Map<String, Object> param);
 
-	public Integer getBrandClassifyRelationCountByMap(Map<String,Object> param);
+	Integer getBrandClassifyRelationCountByMap(Map<String, Object> param);
 
-	public Integer insertBrandClassifyRelation(BrandClassifyRelation brandClassifyRelation);
+	Integer insertBrandClassifyRelation(BrandClassifyRelation brandClassifyRelation);
 
-	public Integer updateBrandClassifyRelation(BrandClassifyRelation brandClassifyRelation);
+	Integer updateBrandClassifyRelation(BrandClassifyRelation brandClassifyRelation);
 
-	public Integer deleteBrandClassifyRelationById(@Param(value = "id") Long id);
+	Integer deleteBrandClassifyRelationById(@Param(value = "id") Long id);
 
-	public Integer batchDeleteBrandClassifyRelation(Map<String,List<String>> params);
+	Integer batchDeleteBrandClassifyRelation(Map<String, List<String>> params);
 
 }

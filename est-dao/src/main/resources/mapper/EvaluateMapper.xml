@@ -110,7 +110,7 @@
         </trim>
     </select>
 
-    <insert id="insertEvaluate" parameterType="cn.est.pojo.Evaluate">
+    <insert id="insert" parameterType="cn.est.pojo.Evaluate" useGeneratedKeys="true" keyProperty="id">
         insert into evaluate(
                         modelId,
                         subscription,

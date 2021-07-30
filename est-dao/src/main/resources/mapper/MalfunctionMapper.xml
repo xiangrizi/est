@@ -4,6 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.est.mapper.MalfunctionMapper">
 
+    <resultMap id="MalfunctionMap" type="cn.est.dto.MalfunctionDTO">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="isHint" property="isHint"/>
+        <result column="hintTitle" property="hintTitle"/>
+        <result column="hintInfo" property="hintInfo"/>
+        <result column="tihintImgtle" property="hintImg"/>
+        <result column="tihintImgtle" property="hintImg"/>
+        <collection property="optionsList"  column="{malfId=id,modelId=modelId}" select="cn.est.mapper.MalfunctionOptionsMapper.getByModelIdAndId"/>
+    </resultMap>
+
+    <select id="getByModelId" resultMap="MalfunctionMap">
+        select
+            id as id,
+            modelId as modelId,
+            title as title,
+            isHint as isHint,
+            hintTitle as hintTitle,
+            hintInfo as hintInfo,
+            hintImg as hintImg,
+            maintainTopPrice as maintainTopPrice,
+            createdUserId as createdUserId,
+            updatedUserId as updatedUserId,
+            creatdTime as creatdTime,
+            updatedTime as updatedTime,
+            isDelete as isDelete
+        from malfunction
+        WHERE isDelete = 0
+          AND modelId = #{modelId}
+    </select>
+
     <select id="getMalfunctionById" resultType="cn.est.pojo.Malfunction">
         select
                 id as id,
