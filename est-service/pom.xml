@@ -12,6 +12,11 @@
     <artifactId>est-service</artifactId>
     <dependencies>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
             <groupId>cn.est</groupId>
             <artifactId>est-dao</artifactId>
             <version>1.0.0-SNAPSHOT</version>
